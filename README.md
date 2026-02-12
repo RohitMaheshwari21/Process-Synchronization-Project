@@ -86,8 +86,8 @@ Classical synchronization problems
 
 ✍️ Author
 Name: Rohit Maheshwari
-St_Id: SP23-BSCS-0055
-Course: Operating Systems
-Institution: MOHAMMAD ALI JINNAH UNIVERSITY, KARACHI
-Semester: Spring 2025
+St_Id: 416733
+Course: python Programming(Basic to Advance) with Fast Api
+Institution: Banoqabil Cliftion Campus
+
 
