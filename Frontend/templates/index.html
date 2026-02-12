@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Process Sync Simulator</title>
+
+  <!-- Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+
+  <!--Custom CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body style="background-color: #f8f9fa">
+
+  <!--  Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+    <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="#">🔄 Process Synchronization Simulator</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#basicCard">Basic</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pcCard">Producer</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dpCard">Dining</a></li>
+          <li class="nav-item"><a class="nav-link" href="#rwCard">Reader</a></li>
+          <li class="nav-item"><a class="nav-link" href="#dpMonCard">Monitor</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Selector & Speed -->
+  <div class="container mt-4">
+    <div class="row mb-4">
+      <div class="col-md-6">
+        <label for="simSelect" class="form-label fw-bold">Select Simulation:</label>
+        <select id="simSelect" class="form-select">
+          <option value="basicCard">Basic Critical Section</option>
+          <option value="pcCard">Producer-Consumer</option>
+          <option value="dpCard">Dining Philosophers</option>
+          <option value="rwCard">Readers-Writers</option>
+          <option value="dpMonCard">Dining Philosophers (Monitor)</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="speedSlider" class="form-label fw-bold">Simulation Speed (ms):</label>
+        <input type="range" id="speedSlider" min="100" max="2000" step="100" value="800" class="form-range">
+      </div>
+    </div>
+
+    <!-- Simulation Cards -->
+    <div class="row" id="simulationArea">
+
+      <!-- Basic -->
+      <div id="basicCard" class="col-md-6 mb-4">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">Basic Critical Section</div>
+          <div class="card-body">
+            <button id="startBasicBtn" class="btn btn-primary mb-2">Start</button>
+            <button onclick="downloadLogs(basicLogArray, 'basic_logs.txt')" class="btn btn-outline-secondary btn-sm float-end">Download Logs</button>
+            <div id="basicLog" class="log-box mt-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Producer-Consumer -->
+      <div id="pcCard" class="col-md-6 mb-4" style="display: none;">
+        <div class="card shadow">
+          <div class="card-header bg-success text-white">Producer–Consumer</div>
+          <div class="card-body">
+            <button id="startPCBtn" class="btn btn-success mb-2">Start</button>
+            <button onclick="downloadLogs(pcLogArray, 'producer_consumer_logs.txt')" class="btn btn-outline-secondary btn-sm float-end">Download Logs</button>
+            <div id="pcLog" class="log-box mt-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dining Philosophers -->
+      <div id="dpCard" class="col-md-6 mb-4" style="display: none;">
+        <div class="card shadow">
+          <div class="card-header bg-warning text-dark">Dining Philosophers</div>
+          <div class="card-body">
+            <button id="startDPBtn" class="btn btn-warning text-dark mb-2">Start</button>
+            <button onclick="downloadLogs(dpLogArray, 'dining_philosophers_logs.txt')" class="btn btn-outline-secondary btn-sm float-end">Download Logs</button>
+            <div id="dpLog" class="log-box mt-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Readers–Writers -->
+      <div id="rwCard" class="col-md-6 mb-4" style="display: none;">
+        <div class="card shadow">
+          <div class="card-header bg-info text-white">Readers–Writers</div>
+          <div class="card-body">
+            <button id="startRWBtn" class="btn btn-info text-white mb-2">Start</button>
+            <button onclick="downloadLogs(rwLogArray, 'readers_writers_logs.txt')" class="btn btn-outline-secondary btn-sm float-end">Download Logs</button>
+            <div id="rwLog" class="log-box mt-3"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dining Philosophers Monitor -->
+      <div id="dpMonCard" class="col-md-6 mb-4" style="display: none;">
+        <div class="card shadow">
+          <div class="card-header bg-secondary text-white">Dining Philosophers (Monitor)</div>
+          <div class="card-body">
+            <button id="startDPMonBtn" class="btn btn-secondary mb-2">Start</button>
+            <button onclick="downloadLogs(dpMonLogArray, 'dining_monitor_logs.txt')" class="btn btn-outline-secondary btn-sm float-end">Download Logs</button>
+            <div id="dpMonLog" class="log-box mt-3"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
